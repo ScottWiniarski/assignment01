@@ -1,6 +1,6 @@
 
 import './App.css';
-import Country from './components/Country';
+import Country from './components/country';
 
 function App() {
   return (
