@@ -1,19 +1,18 @@
-
+import React, { Component } from 'react';
 import './App.css';
 import Country from './components/country';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        Awards
-      </header>
-      <div>
-      <Country />
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          Awards
+        </header>
+        <Country />       
       </div>
-      
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
