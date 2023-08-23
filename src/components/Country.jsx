@@ -18,8 +18,7 @@ class Country extends Component {
             {"Gold Medals: " + this.props.country.gold + " "}
             <Button variant='outlined' color='success' size='small' onClick={ () => this.props.addGold(this.props.country.id) }>+</Button>
             {/* <Button variant='outlined' color='success' size='small'>{this.AddOutlinedIcon}</Button> */}
-            <Button  variant='outlined' color='error' size='small' onClick={this.decreaseGold}>-</Button>
-            {/* <button onClick={this.decreaseGold}> - </button> */}
+            <Button  variant='outlined' color='error' size='small' onClick={ () => this.props.minusGold(this.props.country.id)}>-</Button>
           </div>
          
           </Card>
