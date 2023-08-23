@@ -38,7 +38,7 @@ class Country extends Component {
           </div>
           <div className='Country' style={{ gold:this.renderGold(this.state.gold) }}>
             {"Gold Medals: " + this.state.gold + " "}
-            <button onClick={this.increaseGold}> + </button>
+            {/* <button onClick={this.increaseGold}> + </button> */}
             <Button variant='outlined' color='success' size='small' onClick={this.increaseGold}>+</Button>
             {/* <Button variant='outlined' color='success' size='small'>{this.AddOutlinedIcon}</Button> */}
             <Button variant='outlined' color='error' size='small' onClick={this.decreaseGold}>-</Button>
