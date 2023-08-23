@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Country from './components/country';
-import { isDisabled } from '@testing-library/user-event/dist/utils';
 
 class App extends Component {
   state = {
@@ -13,6 +12,9 @@ class App extends Component {
     ]
   }
 
+  // since we can't use filter methods, we'll use the [...] spread function to copy
+  // an existing array. Using a for loop to search through the array to find the desired countryId,
+  // which itself is pushed from the Country component. 
   handleAddition = (countryId) => {
     console.log(countryId);
     for(let i = 0; i<this.state.countries.length; i++){
@@ -39,14 +41,8 @@ class App extends Component {
         else{
           this.setState({countries:countries});
         }
-          
-        
-        
-        // this.setState({countries:countries});
-        // break;
       }
     }
-    //this.props.country.gold > 0 && this.setState({gold: this.props.country.gold - 1});
   }
 
   render() {
