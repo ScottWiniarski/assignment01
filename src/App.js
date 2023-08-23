@@ -27,7 +27,25 @@ class App extends Component {
 
   handleSubtraction = (countryId) => {
     console.log(countryId);
-
+    for(let i = 0; i < this.state.countries.length; i++){
+      if(this.state.countries[i].id === countryId){
+        let countries = [...this.state.countries];
+        countries[i].gold--
+        if(countries[i].gold <= 0){
+          countries[i].gold = 0;
+          this.setState({countries:countries});
+          break;
+        }
+        else{
+          this.setState({countries:countries});
+        }
+          
+        
+        
+        // this.setState({countries:countries});
+        // break;
+      }
+    }
     //this.props.country.gold > 0 && this.setState({gold: this.props.country.gold - 1});
   }
 
