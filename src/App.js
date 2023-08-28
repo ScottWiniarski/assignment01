@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Country from './components/country';
-import Medal from './components/medal';
 
 class App extends Component {
   state = {
@@ -10,50 +9,69 @@ class App extends Component {
       {id: 2, country: 'Canada', gold: 3, silver: 5, bronze: 3},
       {id: 3, country: 'England', gold: 4, silver: 6, bronze: 2},
       {id: 4, country: 'Spain', gold: 6, silver: 3, bronze: 4},
+    ],
+
+    medals: [
+      {id: 1, name: 'gold'},
+      {id: 2, name: 'silver'},
+      {id: 3, name: 'bronze'},
     ]
   }
 
+  postTotals = () => {
+    let counter = 0;
+    for( let i = 0; i < this.state.medals.length; i++){
+      counter += this.state.countries.reduce(( a,b) => a + b[i], 0);
+      console.log(counter);
+    }
+    return counter;
+  }
+
   // since we can't use filter methods, we'll use the [...] spread function to copy an existing array. 
-  handleAddition = (countryId) => {
+  handleAddition = (countryId, medalName) => {
     const countriesMutable = [...this.state.countries];
     const idx = countriesMutable.findIndex( c => c.id === countryId);
-    countriesMutable[idx].gold += 1;
+    // const desiredCountry = countriesMutable[idx];
+    // desiredCountry[medalName] += 1;
+    countriesMutable[idx][medalName] += 1;
+  
+    // this.setState({desiredCountry:countriesMutable});
     this.setState({countriesMutable:this.state.countries});
   }
 
-  handleSubtraction = (countryId) => {
+  handleSubtraction = (countryId, medalName) => {
     const minusCountries = [...this.state.countries];
     const idx = minusCountries.findIndex( c => c.id === countryId);
-    minusCountries[idx].gold -= 1 && minusCountries[idx].gold > 0;
+
+    const diminishCountry = minusCountries[idx];
+    diminishCountry[medalName] -= 1 && diminishCountry[medalName] > 0;
+    
+    this.setState({diminishCountry:minusCountries});
     this.setState({minusCountries:this.state.countries});
   }
 
-  getGoldMedalTotals() {
-    return this.state.countries.reduce((a,b) => a + b.gold, 0);
-  }
+
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          Awards: <br></br>
-          Total Gold: {this.getGoldMedalTotals()} <br></br>
-          Total Silver: <br></br>
-          Total Bronze: 
+          Awards:
         </header>
+        <div>
+          Grand Totals: {this.postTotals}
+        </div>
         { this.state.countries.map(country =>
         <Country
           key={country.id}
           country = {country}
-          addGold = {this.handleAddition}
-          minusGold = {this.handleSubtraction}
+          medals = {this.state.medals}
+          addMedal = {this.handleAddition}
+          subtractMedal = {this.handleSubtraction}
+          // addGold = {this.handleAddition}
+          // minusGold = {this.handleSubtraction}
           />
           )}
-          {/* <Medal
-            key={country.id}
-            country = {country}
-            medalType = {gold}
-          >/</Medal>       */}
       </div>
     );
   }
