@@ -1,50 +1,69 @@
 import { Button, Card } from '@mui/material';
-// import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import React, { Component } from 'react';
+import Medal from '../components/medal';
 
 class Country extends Component {
-    state = { 
-      name: 'America',
-      gold: 0,
-     }
-      // helper method
-    renderName(name) {
-      return (name === undefined || name === null ? 'Unknown' : name);
-    }
-    renderGold(gold){
-      return (gold === undefined || gold === null? 0 : gold);
-    }
 
-    increaseGold = () => {
-      // convert the function to an arrow function
-      // arrow functions inherit 'this' keyword
-      //console.log(this.state.gold);
-      console.log("Increasing Gold");
-      // the setState method is inherited from the base Component class
-      // when a component's state is altered, it is re-rendered asynchronously by react
-      this.setState({ gold: this.state.gold + 1 })
-    }
-    decreaseGold = () => {
-      console.log("Decreasing Gold");
-      this.state.gold > 0 && this.setState({gold: this.state.gold - 1});
-    }
+    
+
+      getCountryMedalTotals(medals, country){
+        let counter = 0;
+        medals.forEach(medal => {
+          // console.log(medal.name);
+          // console.log(country.country)
+          counter += country[medal.name];
+          console.log(counter);
+          
+        })
+        return counter;
+          
+        
+      }
+
     render() { 
+      const { medals, country, addMedal, subtractMedal} = this.props;
+      // console.log(medals);
+
+      // function getCountryMedalTotals(post){
+      //   let counter = 0;
+      //   for(let i = 0; i < country.Length; i++ ){
+      //     for(let j = 0; j < medals.Length; j++){
+      //         console.log(country[i]);
+      //         console.log(medals[j]);  
+      //         console.log(post);
+      //         return null;
+      //     }
+      //   }
+      // }
       return (
         <Card variant="outlined">
-        
-          <div className='Country' style={{name:this.renderName(this.state.name) }}>
-          {<span style={{ fontWeight: 'bold' }}>{this.state.name}</span>}
-            
+          <div className='Country' style={{ name:(country) }}>
+          {<span style={{ fontWeight: 'bold' }}>{country.country}</span>}
           </div>
-          <div className='Country' style={{ gold:this.renderGold(this.state.gold) }}>
-            {"Gold Medals: " + this.state.gold + " "}
-            {/* <button onClick={this.increaseGold}> + </button> */}
-            <Button variant='outlined' color='success' size='small' onClick={this.increaseGold}>+</Button>
-            {/* <Button variant='outlined' color='success' size='small'>{this.AddOutlinedIcon}</Button> */}
-            <Button variant='outlined' color='error' size='small' onClick={this.decreaseGold}>-</Button>
-            {/* <button onClick={this.decreaseGold}> - </button> */}
+          <div>
+            {this.getCountryMedalTotals(medals, country)} Testing
           </div>
-         
+
+          { medals.map( medal => <Medal 
+          key={medal.id}
+          id = {medal.id}
+          countryId = {country.id}
+          name = {medal.name}
+          count = {country[medal.name]}
+          addMedal = {addMedal}
+          subtractMedal = {subtractMedal}
+          ></Medal>)}
+
+          {/* <Medal
+          key={this.props.country.id}
+          country = {this.props.country.country}
+          medalType = {this.props.country.gold}
+          ></Medal>4 */}
+          {/* <div className='Country' style={{ gold:this.props.country.gold }}>
+            {"Gold Medals: " + this.props.country.gold + " "}
+            <Button variant='outlined' color='success' size='small' onClick={ () => this.props.addGold(this.props.country.id) }>+</Button>
+            <Button variant='outlined' disabled={this.props.country.gold === 0} color='error' size='small' onClick={ () => this.props.minusGold(this.props.country.id)}>-</Button>
+          </div>  */}
           </Card>
       );
     }
