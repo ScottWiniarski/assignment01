@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Country from './components/country';
+import Country from './components/Country';
 
 class App extends Component {
   state = {
@@ -20,10 +20,18 @@ class App extends Component {
 
   postTotals = () => {
     let counter = 0;
-    for( let i = 0; i < this.state.medals.length; i++){
-      counter += this.state.countries.reduce(( a,b) => a + b[i], 0);
-      console.log(counter);
-    }
+    console.log(this.state.medals);
+
+    //return this.state.countries.reduce((a,b) => a + b.gold, 0);
+    
+    //console.log(this.state.countries);
+    this.state.medals.forEach(medal => {
+      //console.log(medal.name);
+      //console.log(this.state.countries.reduce((a,b) => a + b[medal.name], 0));
+      counter += this.state.countries.reduce((a,b) => a + b[medal.name], 0);
+      //console.log(this.state.countries[medal.name]);
+      //console.log(counter);
+    })
     return counter;
   }
 
@@ -50,8 +58,6 @@ class App extends Component {
     this.setState({minusCountries:this.state.countries});
   }
 
-
-
   render() {
     return (
       <div className="App">
@@ -59,7 +65,7 @@ class App extends Component {
           Awards:
         </header>
         <div>
-          Grand Totals: {this.postTotals}
+          Grand Totals for All Countries: - {this.postTotals()} - Medal(s)
         </div>
         { this.state.countries.map(country =>
         <Country

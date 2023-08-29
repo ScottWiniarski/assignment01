@@ -12,7 +12,7 @@ class Country extends Component {
           // console.log(medal.name);
           // console.log(country.country)
           counter += country[medal.name];
-          console.log(counter);
+          //console.log(counter);
           
         })
         return counter;
@@ -22,26 +22,12 @@ class Country extends Component {
 
     render() { 
       const { medals, country, addMedal, subtractMedal} = this.props;
-      // console.log(medals);
-
-      // function getCountryMedalTotals(post){
-      //   let counter = 0;
-      //   for(let i = 0; i < country.Length; i++ ){
-      //     for(let j = 0; j < medals.Length; j++){
-      //         console.log(country[i]);
-      //         console.log(medals[j]);  
-      //         console.log(post);
-      //         return null;
-      //     }
-      //   }
-      // }
+      
       return (
         <Card variant="outlined">
           <div className='Country' style={{ name:(country) }}>
           {<span style={{ fontWeight: 'bold' }}>{country.country}</span>}
-          </div>
-          <div>
-            {this.getCountryMedalTotals(medals, country)} Testing
+          {": " + this.getCountryMedalTotals(medals, country) + " Total Medal(s)"}
           </div>
 
           { medals.map( medal => <Medal 
@@ -53,17 +39,6 @@ class Country extends Component {
           addMedal = {addMedal}
           subtractMedal = {subtractMedal}
           ></Medal>)}
-
-          {/* <Medal
-          key={this.props.country.id}
-          country = {this.props.country.country}
-          medalType = {this.props.country.gold}
-          ></Medal>4 */}
-          {/* <div className='Country' style={{ gold:this.props.country.gold }}>
-            {"Gold Medals: " + this.props.country.gold + " "}
-            <Button variant='outlined' color='success' size='small' onClick={ () => this.props.addGold(this.props.country.id) }>+</Button>
-            <Button variant='outlined' disabled={this.props.country.gold === 0} color='error' size='small' onClick={ () => this.props.minusGold(this.props.country.id)}>-</Button>
-          </div>  */}
           </Card>
       );
     }
