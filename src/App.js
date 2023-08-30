@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Country from './components/Country';
+import NewCountry from './components/NewCountry'
 
 class App extends Component {
   state = {
@@ -57,6 +58,16 @@ class App extends Component {
     this.setState({diminishCountry:minusCountries});
     this.setState({minusCountries:this.state.countries});
   }
+  addCountry = (countryName) => {
+    const {countries} = this.state;
+    console.log(countryName + " in app component.");
+    //const mutableCountries = [...countries];
+
+    const id = countries.length === 0 ? 1: Math.max(...countries.map(country => country.id)) + 1;
+    const mutableCountries = countries.concat({id:id, country: countryName, gold: 0, silver: 0, bronze: 0});
+    console.log(mutableCountries);
+    this.setState({mutableCountries:countries});
+  }
 
   render() {
     return (
@@ -74,10 +85,9 @@ class App extends Component {
           medals = {this.state.medals}
           addMedal = {this.handleAddition}
           subtractMedal = {this.handleSubtraction}
-          // addGold = {this.handleAddition}
-          // minusGold = {this.handleSubtraction}
           />
           )}
+          <NewCountry onAdd={this.addCountry}></NewCountry>
       </div>
     );
   }
