@@ -4,7 +4,7 @@ import Medal from '../components/medal';
 
 class Country extends Component {
 
-    
+  
 
       getCountryMedalTotals(medals, country){
         let counter = 0;
