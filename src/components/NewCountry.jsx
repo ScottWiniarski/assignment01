@@ -30,7 +30,12 @@ class NewCountry extends Component{
                 placeholder="New Country"
                 autoFocus
                 autoComplete="off" />
-              <button onClick={this.saveCountry} type="button">Save</button>
+              <button
+                disabled={country.trim().length === 0}
+                onClick={this.saveCountry}
+                type="button">
+                    Save
+              </button>
               <button onClick={this.toggleForm} type="button">Cancel</button>
             </form>
             :

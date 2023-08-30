@@ -1,10 +1,8 @@
 import { Button, Card } from '@mui/material';
 import React, { Component } from 'react';
-import Medal from '../components/medal';
+import Medal from './Medal';
 
 class Country extends Component {
-
-  
 
       getCountryMedalTotals(medals, country){
         let counter = 0;
@@ -13,15 +11,12 @@ class Country extends Component {
           // console.log(country.country)
           counter += country[medal.name];
           //console.log(counter);
-          
         })
-        return counter;
-          
-        
+        return counter; 
       }
 
     render() { 
-      const { medals, country, addMedal, subtractMedal} = this.props;
+      const { medals, country, addMedal, subtractMedal, deleteThis} = this.props;
       
       return (
         <Card variant="outlined">
@@ -39,6 +34,8 @@ class Country extends Component {
           addMedal = {addMedal}
           subtractMedal = {subtractMedal}
           ></Medal>)}
+
+          <button onClick={() => deleteThis(country.id)} >Remove Country</button>
           </Card>
       );
     }

@@ -21,10 +21,8 @@ class App extends Component {
 
   postTotals = () => {
     let counter = 0;
-    console.log(this.state.medals);
-
+    //console.log(this.state.medals);
     //return this.state.countries.reduce((a,b) => a + b.gold, 0);
-    
     //console.log(this.state.countries);
     this.state.medals.forEach(medal => {
       //console.log(medal.name);
@@ -58,15 +56,23 @@ class App extends Component {
     this.setState({diminishCountry:minusCountries});
     this.setState({minusCountries:this.state.countries});
   }
+
   addCountry = (countryName) => {
     const {countries} = this.state;
     console.log(countryName + " in app component.");
     //const mutableCountries = [...countries];
-
     const id = countries.length === 0 ? 1: Math.max(...countries.map(country => country.id)) + 1;
     const mutableCountries = countries.concat({id:id, country: countryName, gold: 0, silver: 0, bronze: 0});
     console.log(mutableCountries);
-    this.setState({mutableCountries:countries});
+    this.setState({countries:mutableCountries});
+  }
+
+  deleteCountry = (countryId) => {
+    //console.log(countryId);
+    const {countries} = this.state;
+    //console.log(countries + ' in deleteCountry method in app.js');
+    const country = countries.filter( c => c.id !== countryId);
+    this.setState({countries:country});
   }
 
   render() {
@@ -85,6 +91,7 @@ class App extends Component {
           medals = {this.state.medals}
           addMedal = {this.handleAddition}
           subtractMedal = {this.handleSubtraction}
+          deleteThis = {this.deleteCountry}
           />
           )}
           <NewCountry onAdd={this.addCountry}></NewCountry>
